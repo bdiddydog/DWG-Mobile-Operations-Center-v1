@@ -11,16 +11,96 @@
   <title>DWG Operations Center</title>
 </head>
 <body>
-<header><div><small>DELAWARE WEATHER GUY</small><h1>Operations Center</h1><p>Data Over Drama</p></div><button id="refresh">↻</button></header>
+<header>
+  <div><small>DELAWARE WEATHER GUY</small><h1>Operations Center</h1><p>Data Over Drama</p></div>
+  <button id="refresh" aria-label="Refresh weather">↻</button>
+</header>
+
+<nav class="app-nav" aria-label="Operations Center sections">
+  <button class="nav-btn active" data-page="dashboard">Dashboard</button>
+  <button class="nav-btn" data-page="models">Models</button>
+  <button class="nav-btn" data-page="checklist">Checklist</button>
+  <button class="nav-btn" data-page="alerts-page">Alert Center</button>
+  <button class="nav-btn" data-page="radar">Radar</button>
+  <button class="nav-btn" data-page="settings">Settings</button>
+</nav>
+
 <main>
-<section id="setup" class="notice hidden"></section>
-<section class="status"><div><span>Last update</span><strong id="updated">Not loaded</strong></div><div><span>Phone alerts</span><strong id="pushStatus">Not enabled</strong></div></section>
-<section class="buttons"><button id="enablePush">Enable phone alerts</button><button id="testPush">Send test alert</button></section>
-<div class="heading"><h2>Delaware forecast desk</h2><span id="loadState">Ready</span></div>
-<section id="forecast" class="grid"><article class="card">Loading weather…</article></section>
-<div class="heading"><h2>Active Delaware alerts</h2><span id="alertCount">0</span></div>
-<section id="alerts"><p class="muted">Loading NWS alerts…</p></section>
-<section class="rules"><h2>Notification rules</h2><p>Checks run every three hours. Alerts are sent for new NWS products or meaningful changes in temperature, rain chance, wind gusts, or conditions.</p></section>
+  <section id="setup" class="notice hidden"></section>
+
+  <section id="dashboard" class="page active-page">
+    <section class="status">
+      <div><span>Last update</span><strong id="updated">Not loaded</strong></div>
+      <div><span>Phone alerts</span><strong id="pushStatus">Not enabled</strong></div>
+    </section>
+    <section class="buttons">
+      <button id="enablePush">Enable phone alerts</button>
+      <button id="testPush">Send test alert</button>
+    </section>
+    <div class="heading"><h2>Delaware forecast desk</h2><span id="loadState">Ready</span></div>
+    <section id="forecast" class="grid"><article class="card">Loading weather…</article></section>
+    <div class="heading"><h2>Active Delaware alerts</h2><span id="alertCount">0</span></div>
+    <section id="alerts"><p class="muted">Loading NWS alerts…</p></section>
+    <section class="rules"><h2>Notification rules</h2><p>Checks run every three hours. Alerts are sent for new NWS products or meaningful changes in temperature, rain chance, wind gusts, or conditions.</p></section>
+  </section>
+
+  <section id="models" class="page">
+    <div class="page-title"><h2>Weather Models & Analysis</h2><p>One-tap access to your daily guidance desk.</p></div>
+    <div class="tool-grid">
+      <a class="tool-card" href="https://www.weatherbell.com/" target="_blank" rel="noopener"><strong>WeatherBell</strong><span>Paid model suite</span></a>
+      <a class="tool-card" href="https://www.pivotalweather.com/" target="_blank" rel="noopener"><strong>Pivotal Weather</strong><span>Models and soundings</span></a>
+      <a class="tool-card" href="https://www.weathermadness.com/" target="_blank" rel="noopener"><strong>Weather Madness</strong><span>Paid guidance</span></a>
+      <a class="tool-card" href="https://www.tropicaltidbits.com/analysis/models/" target="_blank" rel="noopener"><strong>Tropical Tidbits</strong><span>Free model maps</span></a>
+      <a class="tool-card" href="https://weather.cod.edu/forecast/" target="_blank" rel="noopener"><strong>College of DuPage</strong><span>CAMs, radar and satellite</span></a>
+      <a class="tool-card" href="https://www.spc.noaa.gov/exper/mesoanalysis/" target="_blank" rel="noopener"><strong>SPC Mesoanalysis</strong><span>Severe-weather parameters</span></a>
+      <a class="tool-card" href="https://www.weather.gov/phi/" target="_blank" rel="noopener"><strong>NWS Mount Holly</strong><span>Official local forecast office</span></a>
+      <a class="tool-card" href="https://www.spc.noaa.gov/products/outlook/" target="_blank" rel="noopener"><strong>SPC Outlooks</strong><span>Convective risk guidance</span></a>
+    </div>
+  </section>
+
+  <section id="checklist" class="page">
+    <div class="page-title"><h2>Morning Forecast Checklist</h2><p>Your progress is saved on this device.</p></div>
+    <div id="checklistItems" class="checklist"></div>
+    <button id="resetChecklist" class="secondary-action">Reset checklist</button>
+  </section>
+
+  <section id="alerts-page" class="page">
+    <div class="page-title"><h2>DWG Alert Center</h2><p>Create clear, consistent alert language for followers.</p></div>
+    <div class="alert-template-grid">
+      <button class="alert-template" data-type="Severe Thunderstorm Warning">🌩 Severe Thunderstorm</button>
+      <button class="alert-template" data-type="Tornado Warning">🌪 Tornado Warning</button>
+      <button class="alert-template" data-type="Flash Flood Warning">🌊 Flash Flood</button>
+      <button class="alert-template" data-type="Winter Storm Warning">❄ Winter Storm</button>
+      <button class="alert-template" data-type="Heat Advisory">🥵 Heat</button>
+      <button class="alert-template" data-type="Coastal Flood Warning">🌊 Coastal Flood</button>
+    </div>
+    <label class="editor-label" for="alertEditor">Alert message</label>
+    <textarea id="alertEditor" rows="8" placeholder="Choose an alert type, then edit the message for the affected Delaware areas."></textarea>
+    <div class="editor-actions"><button id="copyAlert">Copy alert text</button><button id="clearAlert" class="secondary-action">Clear</button></div>
+    <p class="muted">Public broadcast sending will be added after a secure administrator login is installed. For now, this creates copy-ready DWG alert text.</p>
+  </section>
+
+  <section id="radar" class="page">
+    <div class="page-title"><h2>Radar & Observations</h2><p>Operational links for monitoring Delaware weather.</p></div>
+    <div class="tool-grid">
+      <a class="tool-card" href="https://radar.weather.gov/" target="_blank" rel="noopener"><strong>NWS Radar</strong><span>Official national radar viewer</span></a>
+      <a class="tool-card" href="https://weather.cod.edu/satrad/" target="_blank" rel="noopener"><strong>COD Satellite & Radar</strong><span>Regional loops and products</span></a>
+      <a class="tool-card" href="https://www.star.nesdis.noaa.gov/GOES/conus.php" target="_blank" rel="noopener"><strong>GOES East</strong><span>Satellite imagery</span></a>
+      <a class="tool-card" href="https://www.weather.gov/phi/" target="_blank" rel="noopener"><strong>NWS PHI</strong><span>Warnings and local observations</span></a>
+      <a class="tool-card" href="https://www.spc.noaa.gov/climo/reports/today.html" target="_blank" rel="noopener"><strong>Storm Reports</strong><span>Today's preliminary reports</span></a>
+      <a class="tool-card" href="https://www.lightningmaps.org/" target="_blank" rel="noopener"><strong>Lightning Map</strong><span>Real-time lightning display</span></a>
+    </div>
+  </section>
+
+  <section id="settings" class="page">
+    <div class="page-title"><h2>App Settings</h2><p>Device-specific preferences for this Operations Center.</p></div>
+    <div class="settings-list">
+      <div class="setting-row"><div><strong>Push notifications</strong><span id="settingsPushStatus">Checking…</span></div><button id="settingsEnablePush">Enable</button></div>
+      <div class="setting-row"><div><strong>Forecast refresh</strong><span>Manual refresh plus scheduled backend checks</span></div><button id="settingsRefresh">Refresh now</button></div>
+      <div class="setting-row"><div><strong>Install app</strong><span>Add this PWA to your Android home screen from Chrome's menu.</span></div></div>
+      <div class="setting-row"><div><strong>Version</strong><span>Phase 1 Core</span></div></div>
+    </div>
+  </section>
 </main>
 <script src="/app.js" defer></script>
 </body>
