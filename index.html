@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0b5cab">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/icons/dwg-icon.svg">
+  <link rel="stylesheet" href="/styles.css">
+  <title>DWG Operations Center</title>
+</head>
+<body>
+<header><div><small>DELAWARE WEATHER GUY</small><h1>Operations Center</h1><p>Data Over Drama</p></div><button id="refresh">↻</button></header>
+<main>
+<section id="setup" class="notice hidden"></section>
+<section class="status"><div><span>Last update</span><strong id="updated">Not loaded</strong></div><div><span>Phone alerts</span><strong id="pushStatus">Not enabled</strong></div></section>
+<section class="buttons"><button id="enablePush">Enable phone alerts</button><button id="testPush">Send test alert</button></section>
+<div class="heading"><h2>Delaware forecast desk</h2><span id="loadState">Ready</span></div>
+<section id="forecast" class="grid"><article class="card">Loading weather…</article></section>
+<div class="heading"><h2>Active Delaware alerts</h2><span id="alertCount">0</span></div>
+<section id="alerts"><p class="muted">Loading NWS alerts…</p></section>
+<section class="rules"><h2>Notification rules</h2><p>Checks run every three hours. Alerts are sent for new NWS products or meaningful changes in temperature, rain chance, wind gusts, or conditions.</p></section>
+</main>
+<script src="/app.js" defer></script>
+</body>
+</html>
