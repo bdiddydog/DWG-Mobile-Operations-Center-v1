@@ -1,0 +1,1 @@
+const{buildSnapshot}=require('./_weather-common');exports.handler=async()=>{try{return{statusCode:200,headers:{'Content-Type':'application/json','Cache-Control':'no-store'},body:JSON.stringify(await buildSnapshot())}}catch(error){return{statusCode:500,headers:{'Content-Type':'application/json'},body:JSON.stringify({error:error.message})}}};
