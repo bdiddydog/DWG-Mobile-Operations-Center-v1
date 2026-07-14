@@ -1,0 +1,1 @@
+exports.handler=async()=>{const missing=[];for(const k of ['RAINBOW_API_KEY','VAPID_PUBLIC_KEY','VAPID_PRIVATE_KEY','VAPID_SUBJECT'])if(!process.env[k])missing.push(k);return{statusCode:200,headers:{'Content-Type':'application/json','Cache-Control':'no-store'},body:JSON.stringify({vapidPublicKey:process.env.VAPID_PUBLIC_KEY||'',missing})}};
